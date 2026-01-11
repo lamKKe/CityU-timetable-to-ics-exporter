@@ -13,14 +13,24 @@ public class DataReader {
     // private String crns = "";
     private ArrayList<Course> coursesAry;
 
-    public DataReader(String data, String program) {
+    public DataReader(String data) {
         Scanner input = null;
         coursesAry = new ArrayList<>();
-        program = program.toUpperCase();
+        // program = program.toUpperCase();
         try {
             input = new Scanner(new File(data));
+            while (true) {
+                String line = input.nextLine();
+                if (line.contains("Total Credit Hours")) {
+                    input.nextLine();
+                    break;
+                }
+            }
             while (input.hasNext()) {
                 String line = input.nextLine();
+                if (line.contains("Return to Previous")) {
+                    break;
+                }
                 // if (line.contains(program) || line.contains("GE") || line.contains("CB")) {
                 searchDetail(line, input);
                 // }
