@@ -6,7 +6,7 @@
 
 1. Log in to **AIMS**.
 2. Navigate to: `Course Registration` > `Weekly Schedule` > `Student Detail Schedule`.
-3. Copy the entire page content into a local text file (e.g., `schedule.txt`).
+3. Copy the entire page content (<kbd>Ctrl</kbd>+<kbd>A</kbd>, <kbd>Ctrl</kbd>+<kbd>C</kbd>) into a local text file (e.g., `schedule.txt`).
 
 ## Usage
 
