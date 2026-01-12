@@ -34,6 +34,17 @@ public class ICSExporter {
         }
     }
 
+    public ICSExporter(Course course) {
+        this();
+        for (Timeslot t : course.getTimeslots()) {
+            addWeeklyEvent(t.getLocation() + "(" + course.getId() + ")",
+                    t.getStartDate(), t.getStartTime(),
+                    t.getStartDate(), t.getEndTime(),
+                    t.getWeekday(),
+                    t.getEndDate(), t.getEndTime());
+        }
+    }
+
     /**
      * Export the built ICS content to a file.
      * 

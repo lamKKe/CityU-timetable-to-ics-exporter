@@ -1,24 +1,26 @@
 import java.util.ArrayList;
 
 public class Course {
-    private String crn, type, id;
+    private String id;
     private ArrayList<Timeslot> timeslots;
     private Course preRequire;
 
-    public Course(String id, String type) {
+    public Course(String id) {
         this.id = id;
-        this.type = type;
         this.timeslots = new ArrayList<>();
     }
 
-    public Course(String id, String type, String crn, Course preRequire) {
-        this(id, type);
-        this.crn = crn;
+    public Course(String id, Course preRequire) {
+        this(id);
         this.preRequire = preRequire;
     }
 
     public boolean isEqualTo(Course o) {
         return this.id.equals(o.id);
+    }
+
+    public boolean isEqualTo(String o) {
+        return this.id.equals(o);
     }
 
     public boolean hasPreRequire() {
@@ -29,28 +31,16 @@ public class Course {
         timeslots.add(t);
     }
 
-    public String getCrn() {
-        return crn;
-    }
-
-    public String getType() {
-        return type;
-    }
-
     public String getId() {
         return id;
-    }
-
-    public void setCrn(String crn) {
-        this.crn = crn;
     }
 
     @Override
     public String toString() {
         // String str = String.format("%s:{\n\stype:%s,\n\scrn:%s\n}", id, type, crn);
-        String str = String.format("%s %s %s", id, type, crn);
+        String str = String.format("%s", id);
         for (Timeslot t : timeslots) {
-            str += "\n\t" + t.toString();
+            str += "\n\t" + t;
         }
         return str;
     }

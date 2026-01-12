@@ -47,8 +47,12 @@ public class DataReader {
         String line = "";
         String[] courseArr = course.split("-");
         String courseId = courseArr[1].trim().replace(" ", "");
-        // courses += courseId + "-";
-        Course c = new Course(courseId, courseArr[2]);
+
+        Course c = hasCourse(courseId);
+        if (c == null) {
+            c = new Course(courseId);
+            coursesAry.add(c);
+        }
         String crn = "";
         do {
             try {
@@ -57,7 +61,6 @@ public class DataReader {
                 if (line.contains("CRN")) {
                     String[] temp = line.split(":");
                     crn = temp[1].trim();
-                    c.setCrn(crn);
                 }
                 if (line.contains("Class")) {
                     String temp[] = line.split("\t");
@@ -69,7 +72,8 @@ public class DataReader {
                     String startDate = convertDate(temp3[0]);
                     String endDate = convertDate(temp3[1]);
                     String location = convertLocation(temp[3]);
-                    Timeslot t = new Timeslot(startTime, endTime, startDate, endDate, weekday, location);
+                    Timeslot t = new Timeslot(crn, courseArr[2], startTime, endTime, startDate, endDate, weekday,
+                            location);
                     c.addTimeslot(t);
                     // System.out.println(line);
                 }
@@ -77,16 +81,14 @@ public class DataReader {
                 break;
             }
         } while (line != "");
-        coursesAry.add(c);
     }
 
-    private boolean hasCourse(Course c) {
-        boolean result = false;
+    private Course hasCourse(String c) {
         for (Course course : coursesAry) {
             if (course.isEqualTo(c))
-                return true;
+                return course;
         }
-        return result;
+        return null;
     }
 
     private String convertWeekday(String inputTime) {
@@ -173,6 +175,7 @@ public class DataReader {
         String result = "";
         for (Course course : coursesAry) {
             result += course + ",\n";
+            result += "\n-------------\n";
         }
         result = result.substring(0, result.length() - 1);
         return result;
@@ -181,7 +184,8 @@ public class DataReader {
     public String getCourseCrns() {
         String result = "";
         for (Course course : coursesAry) {
-            result += course.getCrn() + ",";
+            for (Timeslot t : course.getTimeslots())
+                result += t.getCrn() + ",";
         }
         result = result.substring(0, result.length() - 1);
         return result;

@@ -1,9 +1,11 @@
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class Main {
 
     public static void main(String[] args) {
         String filename = "", cmd, inputname = "";
+        boolean toDifferentFile = false;
         try {
             if (args.length < 1) {
                 System.err.println("usage: java Main.java <filename>");
@@ -19,9 +21,10 @@ public class Main {
                         case "-h":
                             System.out.println("Usage: java Main.java <inputfile> [options]");
                             System.out.println("Options:");
-                            System.out.println("  --help, -h           Show this help message");
-                            System.out.println("  --output, -o <file>  Specify output ICS file name");
-                            System.out.println("  --setfile, -s        Set the input file name");
+                            System.out.println("  --help, -h            Show this help message");
+                            System.out.println("  --output, -o <file>   Specify output ICS file name");
+                            System.out.println("  --setfile, -s         Set the input file name");
+                            System.out.println("  --toDifferentFile, -d Export each course to a different ICS file");
                             return;
                         case "--output":
                         case "-o":
@@ -29,7 +32,14 @@ public class Main {
                             break;
                         case "-s":
                         case "--setfile":
+
                             inputname = extractFileName(args[++i]);
+
+                            break;
+                        case "--toDifferentFile":
+                        case "-d":
+                            i++;
+                            toDifferentFile = true;
                             break;
 
                         default:
@@ -44,8 +54,17 @@ public class Main {
                 inputname = filename;
             }
             DataReader rd = new DataReader(inputname + ".txt");
-            ICSExporter exporter = new ICSExporter(rd.getCoursesAry());
-            exporter.export(filename + ".ics");
+            if (!toDifferentFile) {
+                ICSExporter exporter = new ICSExporter(rd.getCoursesAry());
+                exporter.export(filename + ".ics");
+                // System.out.println(rd.getCoursesJSON());
+            } else {
+                ArrayList<Course> courses = rd.getCoursesAry();
+                for (Course c : courses) {
+                    ICSExporter exporter = new ICSExporter(c);
+                    exporter.export(c.getId() + ".ics");
+                }
+            }
         } catch (IllegalArgumentException e) {
             System.out.println("Invalid argument");
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -58,6 +77,7 @@ public class Main {
     }
 
     public static String extractFileName(String path) {
-        return path.split(".")[0];
+        // System.out.println(path.split("\\.")[0]);
+        return path.split("\\.")[0];
     }
 }

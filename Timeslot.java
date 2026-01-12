@@ -1,19 +1,35 @@
 public class Timeslot {
-    private String startTime, endTime, startDate, endDate, weekday, location;
+    private String crn, startTime, endTime, startDate, endDate, weekday, location, type;
 
-    public Timeslot(String startTime, String endTime, String startDate, String endDate, String weekday,
+    /**
+     * Constructor for Timeslot.
+     * 
+     * @param crn
+     * @param type
+     * @param startTime
+     * @param endTime
+     * @param startDate
+     * @param endDate
+     * @param weekday
+     * @param location
+     * 
+     */
+    public Timeslot(String crn, String type, String startTime, String endTime, String startDate, String endDate,
+            String weekday,
             String location) {
+        this.crn = crn;
         this.startTime = startTime;
         this.endTime = endTime;
         this.startDate = startDate;
         this.endDate = endDate;
         this.weekday = weekday;
         this.location = location;
+        this.type = type;
     }
 
     public String toString() {
-        return String.format("Day: %s\nTime: %s - %s\nDate: %s - %s\nLocation: %s", weekday, startTime, endTime,
-                startDate, endDate, location);
+        return String.format("%s %s %s-%s %s-%s %s %s", crn, type, startTime, endTime, startDate, endDate, weekday,
+                location);
     }
 
     public String getStartTime() {
@@ -64,4 +80,19 @@ public class Timeslot {
         this.location = location;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getCrn() {
+        return crn;
+    }
+
+    public void setCrn(String crn) {
+        this.crn = crn;
+    }
 }
