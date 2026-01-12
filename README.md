@@ -23,3 +23,4 @@ java Main.java <filename>
 | `-h`, `--help` | Show help message |
 | `-o`, `--output <file>` | Specify output ICS file name |
 | `-s`, `--setfile <file>` | Set the input file name |
+| `-d`, `--toDifferentFile` | Export each course to a different ICS file |
