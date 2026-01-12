@@ -26,6 +26,19 @@ public class ICSExporter {
         this("My Calendar");
     }
 
+    public ICSExporter(String calendarName, ArrayList<Course> courses) {
+        this(calendarName);
+        for (Course c : courses) {
+            for (Timeslot t : c.getTimeslots()) {
+                addWeeklyEvent(t.getLocation() + "(" + c.getId() + ")",
+                        t.getStartDate(), t.getStartTime(),
+                        t.getStartDate(), t.getEndTime(),
+                        t.getWeekday(),
+                        t.getEndDate(), t.getEndTime());
+            }
+        }
+    }
+
     public ICSExporter(ArrayList<Course> courses) {
         this();
         for (Course c : courses) {

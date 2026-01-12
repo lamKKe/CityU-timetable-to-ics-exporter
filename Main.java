@@ -53,7 +53,7 @@ public class Main {
             }
             DataReader rd = new DataReader(inputname);
             if (!toDifferentFile) {
-                ICSExporter exporter = new ICSExporter(rd.getCoursesAry());
+                ICSExporter exporter = new ICSExporter(filename, rd.getCoursesAry());
                 exporter.export(filename);
                 // System.out.println(rd.getCoursesJSON());
             } else {
