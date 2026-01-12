@@ -15,3 +15,11 @@ Execute the following command in your terminal:
 ```bash
 java Main.java <filename>
 ```
+
+### Options
+
+| Option | Description |
+| --- | --- |
+| `-h`, `--help` | Show help message |
+| `-o`, `--output <file>` | Specify output ICS file name |
+| `-s`, `--setfile <file>` | Set the input file name |

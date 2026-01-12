@@ -13,7 +13,7 @@ public class DataReader {
     // private String crns = "";
     private ArrayList<Course> coursesAry;
 
-    public DataReader(String data) {
+    public DataReader(String data) throws FileNotFoundException {
         Scanner input = null;
         coursesAry = new ArrayList<>();
         // program = program.toUpperCase();
@@ -36,10 +36,6 @@ public class DataReader {
                 // }
             }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             if (input != null) {
                 input.close();
