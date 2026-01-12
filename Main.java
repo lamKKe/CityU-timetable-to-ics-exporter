@@ -9,7 +9,7 @@ public class Main {
         try {
             if (args.length < 1) {
                 System.err.println("usage: java Main.java <filename>");
-                // filename = "Y1SB";
+                // inputname = "Y1SB.txt";
                 return;
             } else if (args.length == 1 && !args[0].startsWith("-")) {
                 inputname = extractFileName(args[0]);
@@ -32,9 +32,7 @@ public class Main {
                             break;
                         case "-s":
                         case "--setfile":
-
-                            inputname = extractFileName(args[++i]);
-
+                            inputname = args[++i];
                             break;
                         case "--toDifferentFile":
                         case "-d":
@@ -48,12 +46,12 @@ public class Main {
                 }
             }
             if (filename.equals("")) {
-                filename = inputname;
+                filename = extractFileName(inputname);
             }
             if (inputname.equals("")) {
                 inputname = filename;
             }
-            DataReader rd = new DataReader(inputname + ".txt");
+            DataReader rd = new DataReader(inputname);
             if (!toDifferentFile) {
                 ICSExporter exporter = new ICSExporter(rd.getCoursesAry());
                 exporter.export(filename);
