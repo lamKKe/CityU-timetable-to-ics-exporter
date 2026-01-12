@@ -15,7 +15,9 @@ Execute the following command in your terminal:
 ```bash
 java Main.java <filename>
 ```
+Once exported, double-click the `.ics` file to import it into your calendar.
 
+> **Note for Apple users:** When importing, choosing "New Calendar" will automatically name the calendar using the output filename.
 ### Options
 
 | Option | Description |
