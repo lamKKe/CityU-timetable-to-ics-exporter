@@ -10,14 +10,20 @@ import java.util.UUID;
 
 public class ICSExporter {
     StringBuilder builder;
+    String calendarName;
 
-    public ICSExporter() {
+    public ICSExporter(String calendarName) {
         builder = new StringBuilder();
-        // 1. Start the Calendar Container
+        this.calendarName = calendarName;
         builder.append("BEGIN:VCALENDAR\r\n");
         builder.append("VERSION:2.0\r\n");
         builder.append("PRODID:-//My App//Multi Events//EN\r\n");
         builder.append("METHOD:PUBLISH\r\n");
+        builder.append("X-WR-CALNAME:").append(calendarName).append("\r\n");
+    }
+
+    public ICSExporter() {
+        this("My Calendar");
     }
 
     public ICSExporter(ArrayList<Course> courses) {
@@ -34,7 +40,7 @@ public class ICSExporter {
     }
 
     public ICSExporter(Course course) {
-        this();
+        this(course.getId());
         for (Timeslot t : course.getTimeslots()) {
             addWeeklyEvent(t.getLocation() + "(" + course.getId() + ")",
                     t.getStartDate(), t.getStartTime(),
@@ -52,12 +58,21 @@ public class ICSExporter {
     public void export(String filename) {
         builder.append("END:VCALENDAR\r\n");
 
-        try (FileWriter writer = new FileWriter(filename)) {
+        try (FileWriter writer = new FileWriter(filename + ".ics")) {
             writer.write(builder.toString());
-            System.out.println("File '" + filename + "' created.");
+            System.out.println("File '" + filename + ".ics' created.");
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Export the built ICS content to a file.
+     * 
+     * @param filename
+     */
+    public void export() {
+        export(calendarName);
     }
 
     /**

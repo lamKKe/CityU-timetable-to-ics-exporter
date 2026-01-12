@@ -24,9 +24,8 @@ public class DataReader {
                 if (line.contains("Return to Previous")) {
                     break;
                 }
-                // if (line.contains(program) || line.contains("GE") || line.contains("CB")) {
                 searchDetail(line, input);
-                // }
+
             }
 
         } finally {

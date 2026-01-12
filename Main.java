@@ -56,13 +56,13 @@ public class Main {
             DataReader rd = new DataReader(inputname + ".txt");
             if (!toDifferentFile) {
                 ICSExporter exporter = new ICSExporter(rd.getCoursesAry());
-                exporter.export(filename + ".ics");
+                exporter.export(filename);
                 // System.out.println(rd.getCoursesJSON());
             } else {
                 ArrayList<Course> courses = rd.getCoursesAry();
                 for (Course c : courses) {
                     ICSExporter exporter = new ICSExporter(c);
-                    exporter.export(c.getId() + ".ics");
+                    exporter.export();
                 }
             }
         } catch (IllegalArgumentException e) {
