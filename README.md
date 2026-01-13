@@ -2,13 +2,23 @@
 
 > Exports course details from AIMS to a `.ics` file, ready for import into your mobile calendar.
 
+## Web Version (Recommended)
+
+A simple, beautiful web interface is now available! No Java installation needed.
+
+1. Open the [`web/index.html`](web/index.html) file in your browser.
+2. Paste your timetable content directly into the text area.
+3. Click **Convert & Download**.
+
 ## How to get the source data
 
 1. Log in to **AIMS**.
 2. Navigate to: `Course Registration` > `Weekly Schedule` > `Student Detail Schedule`.
-3. Copy the entire page content (<kbd>Ctrl</kbd>+<kbd>A</kbd>, <kbd>Ctrl</kbd>+<kbd>C</kbd>) into a local text file (e.g., `schedule.txt`).
+3. Copy the entire page content (<kbd>Ctrl</kbd>+<kbd>A</kbd>, <kbd>Ctrl</kbd>+<kbd>C</kbd>) into a local text file (e.g., `schedule.txt`) or clipboard.
 
-## Usage
+## CLI Usage
+
+If you prefer the command line:
 
 Execute the following command in your terminal:
 

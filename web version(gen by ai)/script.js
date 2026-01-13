@@ -288,6 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const convertBtn = document.getElementById('convertBtn');
     const inputArea = document.getElementById('inputData');
     const fileInput = document.getElementById('fileInput');
+    const filenameInput = document.getElementById('filenameInput');
 
     fileInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
@@ -316,7 +317,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const icsContent = generateICS(courses);
-            downloadFile("timetable.ics", icsContent);
+
+            let filename = filenameInput.value.trim();
+            if (!filename) {
+                filename = "timetable";
+            }
+            if (!filename.endsWith(".ics")) {
+                filename += ".ics";
+            }
+
+            downloadFile(filename, icsContent);
         } catch (e) {
             console.error(e);
             alert("An error occurred during conversion. See console for details.");
